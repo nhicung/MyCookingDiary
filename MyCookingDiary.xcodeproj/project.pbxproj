@@ -8,13 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		162A865D2616E2F0008EA6DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162A865C2616E2F0008EA6DD /* AppDelegate.swift */; };
-		162A865F2616E2F0008EA6DD /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162A865E2616E2F0008EA6DD /* FirstViewController.swift */; };
-		162A86612616E2F0008EA6DD /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162A86602616E2F0008EA6DD /* SecondViewController.swift */; };
 		162A86642616E2F0008EA6DD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 162A86622616E2F0008EA6DD /* Main.storyboard */; };
 		162A86662616E2F7008EA6DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 162A86652616E2F7008EA6DD /* Assets.xcassets */; };
 		162A86692616E2F7008EA6DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 162A86672616E2F7008EA6DD /* LaunchScreen.storyboard */; };
 		162A86742616E2F7008EA6DD /* MyCookingDiaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162A86732616E2F7008EA6DD /* MyCookingDiaryTests.swift */; };
 		162A867F2616E2F7008EA6DD /* MyCookingDiaryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162A867E2616E2F7008EA6DD /* MyCookingDiaryUITests.swift */; };
+		1657E769261EBF1D00DDE2B7 /* AllRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1657E768261EBF1D00DDE2B7 /* AllRecipeViewController.swift */; };
+		1657E76B261EBF3500DDE2B7 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1657E76A261EBF3500DDE2B7 /* FavoriteViewController.swift */; };
+		1657E76D261EBFC100DDE2B7 /* AddRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1657E76C261EBFC100DDE2B7 /* AddRecipeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,8 +38,6 @@
 /* Begin PBXFileReference section */
 		162A86592616E2F0008EA6DD /* MyCookingDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyCookingDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		162A865C2616E2F0008EA6DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		162A865E2616E2F0008EA6DD /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		162A86602616E2F0008EA6DD /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		162A86632616E2F0008EA6DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		162A86652616E2F7008EA6DD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		162A86682616E2F7008EA6DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +48,9 @@
 		162A867A2616E2F7008EA6DD /* MyCookingDiaryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyCookingDiaryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		162A867E2616E2F7008EA6DD /* MyCookingDiaryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCookingDiaryUITests.swift; sourceTree = "<group>"; };
 		162A86802616E2F7008EA6DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1657E768261EBF1D00DDE2B7 /* AllRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecipeViewController.swift; sourceTree = "<group>"; };
+		1657E76A261EBF3500DDE2B7 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
+		1657E76C261EBFC100DDE2B7 /* AddRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,12 +102,13 @@
 			isa = PBXGroup;
 			children = (
 				162A865C2616E2F0008EA6DD /* AppDelegate.swift */,
-				162A865E2616E2F0008EA6DD /* FirstViewController.swift */,
-				162A86602616E2F0008EA6DD /* SecondViewController.swift */,
 				162A86622616E2F0008EA6DD /* Main.storyboard */,
 				162A86652616E2F7008EA6DD /* Assets.xcassets */,
 				162A86672616E2F7008EA6DD /* LaunchScreen.storyboard */,
 				162A866A2616E2F7008EA6DD /* Info.plist */,
+				1657E768261EBF1D00DDE2B7 /* AllRecipeViewController.swift */,
+				1657E76A261EBF3500DDE2B7 /* FavoriteViewController.swift */,
+				1657E76C261EBFC100DDE2B7 /* AddRecipeViewController.swift */,
 			);
 			path = MyCookingDiary;
 			sourceTree = "<group>";
@@ -259,9 +262,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				162A86612616E2F0008EA6DD /* SecondViewController.swift in Sources */,
+				1657E76D261EBFC100DDE2B7 /* AddRecipeViewController.swift in Sources */,
 				162A865D2616E2F0008EA6DD /* AppDelegate.swift in Sources */,
-				162A865F2616E2F0008EA6DD /* FirstViewController.swift in Sources */,
+				1657E76B261EBF3500DDE2B7 /* FavoriteViewController.swift in Sources */,
+				1657E769261EBF1D00DDE2B7 /* AllRecipeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
