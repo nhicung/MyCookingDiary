@@ -16,6 +16,9 @@
 		1657E769261EBF1D00DDE2B7 /* AllRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1657E768261EBF1D00DDE2B7 /* AllRecipeViewController.swift */; };
 		1657E76B261EBF3500DDE2B7 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1657E76A261EBF3500DDE2B7 /* FavoriteViewController.swift */; };
 		1657E76D261EBFC100DDE2B7 /* AddRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1657E76C261EBFC100DDE2B7 /* AddRecipeViewController.swift */; };
+		1657E770261EE39F00DDE2B7 /* MyCookingDiaryModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1657E76E261EE39F00DDE2B7 /* MyCookingDiaryModel.xcdatamodeld */; };
+		1657E772261F85E000DDE2B7 /* DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1657E771261F85E000DDE2B7 /* DateViewController.swift */; };
+		1657E776261F8D1000DDE2B7 /* RecipeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1657E775261F8D1000DDE2B7 /* RecipeTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,9 @@
 		1657E768261EBF1D00DDE2B7 /* AllRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecipeViewController.swift; sourceTree = "<group>"; };
 		1657E76A261EBF3500DDE2B7 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 		1657E76C261EBFC100DDE2B7 /* AddRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeViewController.swift; sourceTree = "<group>"; };
+		1657E76F261EE39F00DDE2B7 /* MyCookingDiaryModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyCookingDiaryModel.xcdatamodel; sourceTree = "<group>"; };
+		1657E771261F85E000DDE2B7 /* DateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateViewController.swift; sourceTree = "<group>"; };
+		1657E775261F8D1000DDE2B7 /* RecipeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +87,7 @@
 		162A86502616E2F0008EA6DD = {
 			isa = PBXGroup;
 			children = (
+				1657E775261F8D1000DDE2B7 /* RecipeTableViewController.swift */,
 				162A865B2616E2F0008EA6DD /* MyCookingDiary */,
 				162A86722616E2F7008EA6DD /* MyCookingDiaryTests */,
 				162A867D2616E2F7008EA6DD /* MyCookingDiaryUITests */,
@@ -102,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				162A865C2616E2F0008EA6DD /* AppDelegate.swift */,
+				1657E76E261EE39F00DDE2B7 /* MyCookingDiaryModel.xcdatamodeld */,
 				162A86622616E2F0008EA6DD /* Main.storyboard */,
 				162A86652616E2F7008EA6DD /* Assets.xcassets */,
 				162A86672616E2F7008EA6DD /* LaunchScreen.storyboard */,
@@ -109,6 +117,7 @@
 				1657E768261EBF1D00DDE2B7 /* AllRecipeViewController.swift */,
 				1657E76A261EBF3500DDE2B7 /* FavoriteViewController.swift */,
 				1657E76C261EBFC100DDE2B7 /* AddRecipeViewController.swift */,
+				1657E771261F85E000DDE2B7 /* DateViewController.swift */,
 			);
 			path = MyCookingDiary;
 			sourceTree = "<group>";
@@ -264,7 +273,10 @@
 			files = (
 				1657E76D261EBFC100DDE2B7 /* AddRecipeViewController.swift in Sources */,
 				162A865D2616E2F0008EA6DD /* AppDelegate.swift in Sources */,
+				1657E770261EE39F00DDE2B7 /* MyCookingDiaryModel.xcdatamodeld in Sources */,
 				1657E76B261EBF3500DDE2B7 /* FavoriteViewController.swift in Sources */,
+				1657E776261F8D1000DDE2B7 /* RecipeTableViewController.swift in Sources */,
+				1657E772261F85E000DDE2B7 /* DateViewController.swift in Sources */,
 				1657E769261EBF1D00DDE2B7 /* AllRecipeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -594,6 +606,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		1657E76E261EE39F00DDE2B7 /* MyCookingDiaryModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1657E76F261EE39F00DDE2B7 /* MyCookingDiaryModel.xcdatamodel */,
+			);
+			currentVersion = 1657E76F261EE39F00DDE2B7 /* MyCookingDiaryModel.xcdatamodel */;
+			path = MyCookingDiaryModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 162A86512616E2F0008EA6DD /* Project object */;
 }
