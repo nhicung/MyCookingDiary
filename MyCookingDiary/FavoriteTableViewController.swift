@@ -1,31 +1,32 @@
 //
-//  RecipeTableViewController.swift
+//  FavoriteTableViewController.swift
 //  MyCookingDiary
 //
-//  Created by Nhi Cung on 4/8/21.
+//  Created by Nhi Cung on 5/3/21.
 //  Copyright © 2021 Nhi Cung. All rights reserved.
 //
 
 import UIKit
 import CoreData
 
-class RecipeTableViewController: UITableViewController {
- 
-    var recipes:[NSManagedObject] = []
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+class FavoriteTableViewController: UITableViewController {
 
+    var recipes:[NSManagedObject] = []
+    var favoriteList:[NSManagedObject] = []
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//    var count : Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.leftBarButtonItem = self.editButtonItem
-        
-//        loadDataFromDatabase()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-    
+
+    // MARK: - Table view data source
     override func viewWillAppear(_ animated: Bool) {
         loadDataFromDatabase()
         tableView.reloadData()
@@ -42,51 +43,61 @@ class RecipeTableViewController: UITableViewController {
         let request = NSFetchRequest<NSManagedObject>(entityName: "Recipe")
         do {
             recipes = try context.fetch(request)
+            favoriteList = []
+            for recipe in recipes {
+                let r = recipe as! Recipe
+                if r.favorite == true {
+                    favoriteList.append(r)
+                }
+            }
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
     }
 
-    // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recipes.count
+        return favoriteList.count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "RecipesCell", for: indexPath) as! RecipeTableViewCell
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FavoriteCell", for: indexPath) as! FavoritesTableViewCell
+        
         // Configure the cell...
-        let recipe = recipes[indexPath.row] as? Recipe
-//        if let imageData = currentRecipe?.image as? Data{
-//            cell.recipeImg.image = UIImage(data: imageData)
+        let recipe = favoriteList[indexPath.row] as? Recipe
+        //        if let imageData = currentRecipe?.image as? Data{
+        //            cell.recipeImg.image = UIImage(data: imageData)
+        //        }
+        
+//        if recipe?.favorite == true{
+            cell.faveTitle.text = recipe?.recipeName
+            //        cell.detailTextLabel?.text = recipe?.time
+            let image = recipe?.image
+            //        image = jpegData(compressionQuality: 0.9)
+            if image != nil{
+                //            cell.recipeImg.contentMode = .scaleAspectFit
+                cell.favImage.image = UIImage(data: image!)
+            }
+//        } else {
+//            cell.isHidden = true
 //        }
-        cell.recipeTitle.text = recipe?.recipeName
-//        cell.detailTextLabel?.text = recipe?.time
-        let image = recipe?.image
-//        image = jpegData(compressionQuality: 0.9)
-        if image != nil{
-//            cell.recipeImg.contentMode = .scaleAspectFit
-            cell.recipeImg.image = UIImage(data: image!)
-        }
-        cell.accessoryType = UITableViewCell.AccessoryType .detailDisclosureButton
+       cell.accessoryType = UITableViewCell.AccessoryType .detailDisclosureButton
         return cell
     }
     
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
-        if segue.identifier == "Edit Recipe" {
+        if segue.identifier == "Edit Favorite" {
             let recipeController = segue.destination as? AddRecipeViewController
             let selectedRow = self.tableView.indexPath(for: sender as! UITableViewCell)?.row
             let selectedRecipe = recipes[selectedRow!] as? Recipe
             recipeController?.currentRecipe = selectedRecipe!
         }
     }
-    
     
     /*
     // Override to support conditional editing of the table view.
@@ -96,6 +107,7 @@ class RecipeTableViewController: UITableViewController {
     }
     */
 
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
@@ -112,18 +124,17 @@ class RecipeTableViewController: UITableViewController {
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
-    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         let selectedRecipe = recipes[indexPath.row] as? Recipe
         let name = selectedRecipe!.recipeName!
-        let actionHandler = { (actions:UIAlertAction!) -> Void in self.performSegue(withIdentifier: "Edit Recipe", sender: tableView.cellForRow(at: indexPath))
+        let actionHandler = { (actions:UIAlertAction!) -> Void in self.performSegue(withIdentifier: "Edit Favorite", sender: tableView.cellForRow(at: indexPath))
         }
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let controller = storyboard.instantiateViewController(withIdentifier: "RecipeController") as? AddRecipeViewController
-//        controller?.currentRecipe = selectedRecipe
-//        self.navigationController?.pushViewController(controller!, animated: true)
+        //        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        //        let controller = storyboard.instantiateViewController(withIdentifier: "RecipeController") as? AddRecipeViewController
+        //        controller?.currentRecipe = selectedRecipe
+        //        self.navigationController?.pushViewController(controller!, animated: true)
         
         let alertController = UIAlertController(title: "Recipe selected", message: "Selected row: \(indexPath.row) (\(name))", preferredStyle: .alert)
         let actionCancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -132,6 +143,7 @@ class RecipeTableViewController: UITableViewController {
         alertController.addAction(actionDetails)
         present(alertController, animated: true, completion: nil)
     }
+
 
     /*
     // Override to support rearranging the table view.

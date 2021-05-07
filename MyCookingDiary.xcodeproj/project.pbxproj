@@ -13,12 +13,13 @@
 		162A86692616E2F7008EA6DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 162A86672616E2F7008EA6DD /* LaunchScreen.storyboard */; };
 		162A86742616E2F7008EA6DD /* MyCookingDiaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162A86732616E2F7008EA6DD /* MyCookingDiaryTests.swift */; };
 		162A867F2616E2F7008EA6DD /* MyCookingDiaryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162A867E2616E2F7008EA6DD /* MyCookingDiaryUITests.swift */; };
-		1657E769261EBF1D00DDE2B7 /* AllRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1657E768261EBF1D00DDE2B7 /* AllRecipeViewController.swift */; };
-		1657E76B261EBF3500DDE2B7 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1657E76A261EBF3500DDE2B7 /* FavoriteViewController.swift */; };
 		1657E76D261EBFC100DDE2B7 /* AddRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1657E76C261EBFC100DDE2B7 /* AddRecipeViewController.swift */; };
 		1657E770261EE39F00DDE2B7 /* MyCookingDiaryModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1657E76E261EE39F00DDE2B7 /* MyCookingDiaryModel.xcdatamodeld */; };
 		1657E772261F85E000DDE2B7 /* DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1657E771261F85E000DDE2B7 /* DateViewController.swift */; };
 		1657E776261F8D1000DDE2B7 /* RecipeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1657E775261F8D1000DDE2B7 /* RecipeTableViewController.swift */; };
+		166E87BE263FD48B00634302 /* RecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166E87BD263FD48B00634302 /* RecipeTableViewCell.swift */; };
+		166E87C026411A8600634302 /* FavoriteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166E87BF26411A8600634302 /* FavoriteTableViewController.swift */; };
+		16C484192641277100342FA9 /* FavoritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C484182641277100342FA9 /* FavoritesTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,12 +52,13 @@
 		162A867A2616E2F7008EA6DD /* MyCookingDiaryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyCookingDiaryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		162A867E2616E2F7008EA6DD /* MyCookingDiaryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCookingDiaryUITests.swift; sourceTree = "<group>"; };
 		162A86802616E2F7008EA6DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1657E768261EBF1D00DDE2B7 /* AllRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecipeViewController.swift; sourceTree = "<group>"; };
-		1657E76A261EBF3500DDE2B7 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 		1657E76C261EBFC100DDE2B7 /* AddRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeViewController.swift; sourceTree = "<group>"; };
 		1657E76F261EE39F00DDE2B7 /* MyCookingDiaryModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyCookingDiaryModel.xcdatamodel; sourceTree = "<group>"; };
 		1657E771261F85E000DDE2B7 /* DateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateViewController.swift; sourceTree = "<group>"; };
 		1657E775261F8D1000DDE2B7 /* RecipeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeTableViewController.swift; sourceTree = "<group>"; };
+		166E87BD263FD48B00634302 /* RecipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeTableViewCell.swift; sourceTree = "<group>"; };
+		166E87BF26411A8600634302 /* FavoriteTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewController.swift; sourceTree = "<group>"; };
+		16C484182641277100342FA9 /* FavoritesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,13 +113,14 @@
 				162A865C2616E2F0008EA6DD /* AppDelegate.swift */,
 				1657E76E261EE39F00DDE2B7 /* MyCookingDiaryModel.xcdatamodeld */,
 				162A86622616E2F0008EA6DD /* Main.storyboard */,
+				16C484182641277100342FA9 /* FavoritesTableViewCell.swift */,
+				166E87BD263FD48B00634302 /* RecipeTableViewCell.swift */,
 				162A86652616E2F7008EA6DD /* Assets.xcassets */,
 				162A86672616E2F7008EA6DD /* LaunchScreen.storyboard */,
 				162A866A2616E2F7008EA6DD /* Info.plist */,
-				1657E768261EBF1D00DDE2B7 /* AllRecipeViewController.swift */,
-				1657E76A261EBF3500DDE2B7 /* FavoriteViewController.swift */,
 				1657E76C261EBFC100DDE2B7 /* AddRecipeViewController.swift */,
 				1657E771261F85E000DDE2B7 /* DateViewController.swift */,
+				166E87BF26411A8600634302 /* FavoriteTableViewController.swift */,
 			);
 			path = MyCookingDiary;
 			sourceTree = "<group>";
@@ -272,12 +275,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				1657E76D261EBFC100DDE2B7 /* AddRecipeViewController.swift in Sources */,
+				16C484192641277100342FA9 /* FavoritesTableViewCell.swift in Sources */,
+				166E87C026411A8600634302 /* FavoriteTableViewController.swift in Sources */,
+				166E87BE263FD48B00634302 /* RecipeTableViewCell.swift in Sources */,
 				162A865D2616E2F0008EA6DD /* AppDelegate.swift in Sources */,
 				1657E770261EE39F00DDE2B7 /* MyCookingDiaryModel.xcdatamodeld in Sources */,
-				1657E76B261EBF3500DDE2B7 /* FavoriteViewController.swift in Sources */,
 				1657E776261F8D1000DDE2B7 /* RecipeTableViewController.swift in Sources */,
 				1657E772261F85E000DDE2B7 /* DateViewController.swift in Sources */,
-				1657E769261EBF1D00DDE2B7 /* AllRecipeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

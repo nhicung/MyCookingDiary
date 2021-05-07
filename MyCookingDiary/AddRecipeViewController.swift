@@ -12,6 +12,7 @@ import CoreData
 class AddRecipeViewController: UIViewController, UITextFieldDelegate, DateControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var currentRecipe: Recipe?
+    var isChecked = true
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
     @IBOutlet weak var tfTime: UITextField!
@@ -22,7 +23,9 @@ class AddRecipeViewController: UIViewController, UITextFieldDelegate, DateContro
     @IBOutlet weak var tfStep: UITextField!
     @IBOutlet weak var sgmtEditMode: UISegmentedControl!
     @IBOutlet weak var imgRecipePic: UIImageView!
+    @IBOutlet weak var btnAddFav: UIButton!
     
+    @IBOutlet weak var btnImage: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,10 +36,18 @@ class AddRecipeViewController: UIViewController, UITextFieldDelegate, DateContro
             recipeName.text = currentRecipe!.recipeName
             tfTime.text = currentRecipe!.time
             tfStep.text = currentRecipe!.instruction
+//            currentRecipe?.add = "Add to Favorite"
+            addToFavorite(btnAddFav)
+            if currentRecipe!.add != nil {
+                btnAddFav.setTitle(currentRecipe!.add, for: .normal)
+            }
             let formatter = DateFormatter()
             formatter.dateStyle = .short
             if currentRecipe!.date != nil {
                 lblDate.text = formatter.string(from: currentRecipe!.date as! Date)
+            }
+            if let imageData = currentRecipe?.image as? Data{
+                imgRecipePic.image = UIImage(data: imageData)
             }
         }
         changeEditMode(self)
@@ -99,12 +110,14 @@ class AddRecipeViewController: UIViewController, UITextFieldDelegate, DateContro
     
     @IBAction func changeEditMode(_ sender: Any) {
         let textFields: [UITextField] = [recipeName, tfStep,tfTime]
-        if sgmtEditMode.selectedSegmentIndex==0{
+        if sgmtEditMode.selectedSegmentIndex == 0{
             for textField in textFields {
                 textField.isEnabled = false
                 textField.borderStyle = UITextField.BorderStyle.none
             }
+            btnImage.isHidden = true
             btnDate.isHidden = true
+            btnAddFav.isHidden = false
             navigationItem.rightBarButtonItem = nil
         }
         else if sgmtEditMode.selectedSegmentIndex == 1 {
@@ -112,10 +125,23 @@ class AddRecipeViewController: UIViewController, UITextFieldDelegate, DateContro
                 textField.isEnabled = true
                 textField.borderStyle = UITextField.BorderStyle.roundedRect
             }
+            btnImage.isHidden = false
             btnDate.isHidden = false
+            btnAddFav.isHidden = true
+//            btnAddFav.addTarget(self, action: #selector(self.saveRecipe), for: .touchDown)
             navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(self.saveRecipe))
         }
     }
+    
+    @IBAction func addToFavorite(_ sender: UIButton) {
+        isChecked = !isChecked
+        if isChecked {
+            currentRecipe?.add = "Added!"
+            btnAddFav.setTitle(currentRecipe!.add, for: .normal)
+            currentRecipe?.favorite = true
+        }
+    }
+    
     
     @objc func saveRecipe() {
         appDelegate.saveContext()
@@ -142,14 +168,32 @@ class AddRecipeViewController: UIViewController, UITextFieldDelegate, DateContro
     }
     
     @IBAction func changePic(_ sender: Any) {
-        if UIImagePickerController.isSourceTypeAvailable(.camera){
-            let cameraController = UIImagePickerController()
-            cameraController.sourceType = .camera
-            cameraController.cameraCaptureMode = .photo
-            cameraController.delegate = self
-            cameraController.allowsEditing = true
-            self.present(cameraController, animated: true, completion: nil)
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
+            let libraryController = UIImagePickerController()
+            libraryController.sourceType = .photoLibrary
+//            libraryController.cameraCaptureMode = .photo
+            libraryController.delegate = self
+            libraryController.allowsEditing = true
+//            self.present(libraryController, animated: true, completion: nil)
+            self.navigationController?.present(libraryController, animated: true, completion: nil)
         }
+    }
+    
+    @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey:Any]) {
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            if currentRecipe == nil {
+                let context = appDelegate.persistentContainer.viewContext
+                currentRecipe = Recipe(context : context)
+            }
+            currentRecipe?.image = image.jpegData(compressionQuality: 1.0)
+            imgRecipePic.contentMode = .scaleAspectFit
+            imgRecipePic.image = image
+        }
+        self.dismiss(animated: true, completion: nil)
+//        let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+//        //Or you can get the image url from AssetsLibrary
+//        let path = info[UIImagePickerController.InfoKey.referenceURL] as? URL
+//        picker.dismiss(animated: true, completion: nil)
     }
     
 }
