@@ -11,22 +11,15 @@ import UIKit
 class RecipeTableViewCell: UITableViewCell {
     @IBOutlet weak var recipeImg: UIImageView!
     @IBOutlet weak var recipeTitle: UILabel!
-    @IBOutlet weak var favToggle: UIButton!
+    @IBOutlet weak var btnLike: UIButton!
+    @IBOutlet weak var rateRep: UILabel!
+    
     var isChecked = true
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         // Initialization code
-    }
-    @IBAction func toggleButton(_ sender: UIButton) {
-        isChecked = !isChecked
-        if isChecked {
-            sender.setTitle("Added!", for: .normal)
-        }
-//        else {
-//            sender.setTitle("Add to Favorite", for: .normal)
-//        }
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

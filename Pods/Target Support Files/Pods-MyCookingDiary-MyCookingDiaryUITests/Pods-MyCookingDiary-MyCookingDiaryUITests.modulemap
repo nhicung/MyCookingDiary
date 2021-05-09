@@ -1,0 +1,6 @@
+framework module Pods_MyCookingDiary_MyCookingDiaryUITests {
+  umbrella header "Pods-MyCookingDiary-MyCookingDiaryUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

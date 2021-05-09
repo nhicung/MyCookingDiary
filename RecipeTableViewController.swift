@@ -13,7 +13,8 @@ class RecipeTableViewController: UITableViewController {
  
     var recipes:[NSManagedObject] = []
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
-
+    var isChecked = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.leftBarButtonItem = self.editButtonItem
@@ -62,28 +63,43 @@ class RecipeTableViewController: UITableViewController {
 
         // Configure the cell...
         let recipe = recipes[indexPath.row] as? Recipe
-//        if let imageData = currentRecipe?.image as? Data{
-//            cell.recipeImg.image = UIImage(data: imageData)
-//        }
         cell.recipeTitle.text = recipe?.recipeName
-//        cell.detailTextLabel?.text = recipe?.time
+        cell.rateRep.text = String (format: "%.1f", recipe!.rate)
         let image = recipe?.image
-//        image = jpegData(compressionQuality: 0.9)
         if image != nil{
-//            cell.recipeImg.contentMode = .scaleAspectFit
             cell.recipeImg.image = UIImage(data: image!)
         }
-        cell.accessoryType = UITableViewCell.AccessoryType .detailDisclosureButton
+        if recipe?.favorite == true {
+            cell.btnLike.setImage(UIImage(named: "heart.png"), for: .normal)
+        }else{
+            cell.btnLike.setImage(UIImage(named: "heart-2.png"), for: .normal)
+        }
+
+        cell.btnLike.tag = indexPath.row
+        cell.btnLike.addTarget(self, action: #selector(likeRecipe(_ :)), for: .touchUpInside)
+
+//        cell.accessoryType = UITableViewCell.AccessoryType .detailDisclosureButton
         return cell
     }
+    @objc func likeRecipe(_ sender: UIButton) {
+        let recipe = recipes[sender.tag] as? Recipe
+        recipe?.favorite = !recipe!.favorite
+        if recipe?.favorite == true {
+            sender.setImage(UIImage(named: "heart.png"), for: .normal)
+            recipe?.add = "Remove from Favorite"
+        }else {
+            sender.setImage(UIImage(named: "heart-2.png"), for: .normal)
+            recipe?.add = "Add to Favorite"
+        }
+    }
     
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
         if segue.identifier == "Edit Recipe" {
             let recipeController = segue.destination as? AddRecipeViewController
             let selectedRow = self.tableView.indexPath(for: sender as! UITableViewCell)?.row
             let selectedRecipe = recipes[selectedRow!] as? Recipe
             recipeController?.currentRecipe = selectedRecipe!
+            
         }
     }
     
@@ -120,17 +136,17 @@ class RecipeTableViewController: UITableViewController {
         let name = selectedRecipe!.recipeName!
         let actionHandler = { (actions:UIAlertAction!) -> Void in self.performSegue(withIdentifier: "Edit Recipe", sender: tableView.cellForRow(at: indexPath))
         }
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let controller = storyboard.instantiateViewController(withIdentifier: "RecipeController") as? AddRecipeViewController
-//        controller?.currentRecipe = selectedRecipe
-//        self.navigationController?.pushViewController(controller!, animated: true)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "RecipeController") as? AddRecipeViewController
+        controller?.currentRecipe = selectedRecipe
+        self.navigationController?.pushViewController(controller!, animated: true)
         
-        let alertController = UIAlertController(title: "Recipe selected", message: "Selected row: \(indexPath.row) (\(name))", preferredStyle: .alert)
-        let actionCancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        let actionDetails = UIAlertAction(title: "Show Details", style: .default, handler: actionHandler)
-        alertController.addAction(actionCancel)
-        alertController.addAction(actionDetails)
-        present(alertController, animated: true, completion: nil)
+//        let alertController = UIAlertController(title: "Recipe selected", message: "Selected row: \(indexPath.row) (\(name))", preferredStyle: .alert)
+//        let actionCancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+//        let actionDetails = UIAlertAction(title: "Show Details", style: .default, handler: actionHandler)
+//        alertController.addAction(actionCancel)
+//        alertController.addAction(actionDetails)
+//        present(alertController, animated: true, completion: nil)
     }
 
     /*

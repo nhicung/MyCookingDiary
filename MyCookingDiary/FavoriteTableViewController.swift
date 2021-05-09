@@ -18,7 +18,7 @@ class FavoriteTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.leftBarButtonItem = self.editButtonItem
+//        self.navigationItem.leftBarButtonItem = self.editButtonItem
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -69,13 +69,8 @@ class FavoriteTableViewController: UITableViewController {
         
         // Configure the cell...
         let recipe = favoriteList[indexPath.row] as? Recipe
-        //        if let imageData = currentRecipe?.image as? Data{
-        //            cell.recipeImg.image = UIImage(data: imageData)
-        //        }
-        
-//        if recipe?.favorite == true{
             cell.faveTitle.text = recipe?.recipeName
-            //        cell.detailTextLabel?.text = recipe?.time
+            cell.rateFav.text = String (format: "%.1f", recipe!.rate)
             let image = recipe?.image
             //        image = jpegData(compressionQuality: 0.9)
             if image != nil{
@@ -85,7 +80,7 @@ class FavoriteTableViewController: UITableViewController {
 //        } else {
 //            cell.isHidden = true
 //        }
-       cell.accessoryType = UITableViewCell.AccessoryType .detailDisclosureButton
+//       cell.accessoryType = UITableViewCell.AccessoryType .detailDisclosureButton
         return cell
     }
     
@@ -109,23 +104,24 @@ class FavoriteTableViewController: UITableViewController {
 
     
     // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            let recipe = recipes[indexPath.row] as? Recipe
-            let context = appDelegate.persistentContainer.viewContext
-            context.delete(recipe!)
-            do {
-                try context.save()
-            } catch {
-                fatalError("Error saving context: \(error)")
-            }
-            loadDataFromDatabase()
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }
-    }
+//    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .delete {
+//            // Delete the row from the data source
+//            let recipe = recipes[indexPath.row] as? Recipe
+//            let context = appDelegate.persistentContainer.viewContext
+//            context.delete(recipe!)
+//            do {
+//                try context.save()
+//            } catch {
+//                fatalError("Error saving context: \(error)")
+//            }
+//            loadDataFromDatabase()
+////            tableView.deleteRows(at: [indexPath], with: .fade)
+//        } else if editingStyle == .insert {
+//            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+//        }
+//    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         let selectedRecipe = recipes[indexPath.row] as? Recipe
         let name = selectedRecipe!.recipeName!

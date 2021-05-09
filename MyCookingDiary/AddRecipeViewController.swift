@@ -12,7 +12,9 @@ import CoreData
 class AddRecipeViewController: UIViewController, UITextFieldDelegate, DateControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var currentRecipe: Recipe?
-    var isChecked = true
+    //var isChecked = true
+    let addFavoriteBtn: String = "Add to Favorite"
+    let removeFavoriteBtn: String = "Remove from Favorite"
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
     @IBOutlet weak var tfTime: UITextField!
@@ -20,24 +22,29 @@ class AddRecipeViewController: UIViewController, UITextFieldDelegate, DateContro
     @IBOutlet weak var recipeName: UITextField!
     @IBOutlet weak var lblDate: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var tfStep: UITextField!
+    @IBOutlet weak var tvIngredient: UITextView!
+    @IBOutlet weak var tvInstruction: UITextView!
     @IBOutlet weak var sgmtEditMode: UISegmentedControl!
     @IBOutlet weak var imgRecipePic: UIImageView!
     @IBOutlet weak var btnAddFav: UIButton!
+    @IBOutlet weak var rateBar: FloatRatingView!
     
     @IBOutlet weak var btnImage: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        // Do any additional setup after loading the view
         
         if currentRecipe != nil {
             recipeName.text = currentRecipe!.recipeName
             tfTime.text = currentRecipe!.time
-            tfStep.text = currentRecipe!.instruction
+            tvIngredient.text = currentRecipe!.ingredient
+            tvInstruction.text = currentRecipe!.instruction
+            rateBar.rating = currentRecipe!.rate
+//            rateBar.type = .floatRatings
 //            currentRecipe?.add = "Add to Favorite"
-            addToFavorite(btnAddFav)
+//            addToFavorite(btnAddFav)
             if currentRecipe!.add != nil {
                 btnAddFav.setTitle(currentRecipe!.add, for: .normal)
             }
@@ -51,11 +58,15 @@ class AddRecipeViewController: UIViewController, UITextFieldDelegate, DateContro
             }
         }
         changeEditMode(self)
-         let textFields: [UITextField] = [recipeName, tfStep,tfTime]
-        
+        let textFields: [UITextField] = [recipeName, tfTime]
         for textField in textFields {
             textField.addTarget(self, action: #selector(UITextFieldDelegate.textFieldShouldEndEditing(_:)), for: UIControl.Event.editingDidEnd)
         }
+//        let textViews: [UITextView] = [tvInstruction, tvIngredient]
+//        for textView in textViews {
+//            textView.addTarget(self, action: #selector(UITextViewDelegate.textViewShouldEndEditing(_:)), for: UIControl.Event.editingDidEnd)
+//        }
+        rateBar.delegate = self as? FloatRatingViewDelegate
     }
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
@@ -65,7 +76,16 @@ class AddRecipeViewController: UIViewController, UITextFieldDelegate, DateContro
         }
         currentRecipe?.recipeName = recipeName.text
         currentRecipe?.time = tfTime.text
-        currentRecipe?.instruction = tfStep.text
+        return true
+    }
+    
+    private func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
+        if currentRecipe == nil {
+            let context = appDelegate.persistentContainer.viewContext
+            currentRecipe = Recipe(context: context)
+        }
+            currentRecipe?.instruction = tvInstruction.text
+            currentRecipe?.ingredient = tvIngredient.text
         return true
     }
     
@@ -109,12 +129,17 @@ class AddRecipeViewController: UIViewController, UITextFieldDelegate, DateContro
     }
     
     @IBAction func changeEditMode(_ sender: Any) {
-        let textFields: [UITextField] = [recipeName, tfStep,tfTime]
+        let textFields: [UITextField] = [recipeName,tfTime]
         if sgmtEditMode.selectedSegmentIndex == 0{
             for textField in textFields {
                 textField.isEnabled = false
                 textField.borderStyle = UITextField.BorderStyle.none
             }
+            tvIngredient.layer.borderWidth = 0
+            tvIngredient.isEditable = false
+            tvInstruction.layer.borderWidth = 0
+            tvInstruction.isEditable = false
+            rateBar.editable = false
             btnImage.isHidden = true
             btnDate.isHidden = true
             btnAddFav.isHidden = false
@@ -125,28 +150,43 @@ class AddRecipeViewController: UIViewController, UITextFieldDelegate, DateContro
                 textField.isEnabled = true
                 textField.borderStyle = UITextField.BorderStyle.roundedRect
             }
+            tvIngredient.layer.borderWidth = 0.5
+            tvIngredient.layer.cornerRadius = 5
+            tvIngredient.isEditable = true
+            tvIngredient.layer.borderColor = UIColor.gray.cgColor
+            tvInstruction.layer.borderWidth = 0.5
+            tvInstruction.layer.cornerRadius = 5
+            tvInstruction.isEditable = true
+            tvInstruction.layer.borderColor = UIColor.gray.cgColor
+            rateBar.editable = true
+            rateBar.type = .floatRatings
             btnImage.isHidden = false
             btnDate.isHidden = false
             btnAddFav.isHidden = true
-//            btnAddFav.addTarget(self, action: #selector(self.saveRecipe), for: .touchDown)
             navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(self.saveRecipe))
         }
     }
     
     @IBAction func addToFavorite(_ sender: UIButton) {
-        isChecked = !isChecked
-        if isChecked {
-            currentRecipe?.add = "Added!"
-            btnAddFav.setTitle(currentRecipe!.add, for: .normal)
-            currentRecipe?.favorite = true
-        }
+        currentRecipe?.favorite = !currentRecipe!.favorite
+        buttonLabel()
     }
     
+    func buttonLabel() {
+        if currentRecipe?.favorite == true {
+            btnAddFav.setTitle(removeFavoriteBtn, for: .normal)
+        } else {
+            btnAddFav.setTitle(addFavoriteBtn, for: .normal)
+        }
+    }
     
     @objc func saveRecipe() {
         appDelegate.saveContext()
         sgmtEditMode.selectedSegmentIndex = 0
         changeEditMode(self)
+        currentRecipe?.rate = rateBar.rating
+        currentRecipe?.instruction = tvInstruction.text
+        currentRecipe?.ingredient = tvIngredient.text
     }
     
     func dateChanged(date: Date) {
@@ -196,4 +236,25 @@ class AddRecipeViewController: UIViewController, UITextFieldDelegate, DateContro
 //        picker.dismiss(animated: true, completion: nil)
     }
     
+    func textFieldDidChange(_ textView: UITextView){
+        let size = CGSize(width: view.frame.width, height: .infinity)
+        let estimatedSize = tvIngredient.sizeThatFits(size)
+        
+        tvIngredient.constraints.forEach { (constraint) in
+            if constraint.firstAttribute == .height {
+                constraint.constant = estimatedSize.height
+            }
+        }
+    }
+    
 }
+
+//extension AddRecipeViewController: FloatRatingViewDelegate {
+//
+//    // MARK: FloatRatingViewDelegate
+//
+//    func floatRatingView(_ ratingView: FloatRatingView, didUpdate rating: Double) {
+//        currentRecipe!.rate = self.rateBar.rating
+//    }
+//
+//}
