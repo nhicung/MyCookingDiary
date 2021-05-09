@@ -362,13 +362,13 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fxu-RE-23w">
-                                            <rect key="frame" x="170" y="68" width="22" height="21"/>
+                                            <rect key="frame" x="195" y="68" width="22" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" translatesAutoresizingMaskIntoConstraints="NO" id="aHc-5d-W6A">
-                                            <rect key="frame" x="196" y="68" width="20" height="20"/>
+                                            <rect key="frame" x="170" y="68" width="20" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20" id="NkI-XE-VMO"/>
                                                 <constraint firstAttribute="width" constant="20" id="wVG-QP-fjd"/>
@@ -376,9 +376,9 @@
                                         </imageView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="fxu-RE-23w" firstAttribute="leading" secondItem="jmX-nK-4A3" secondAttribute="trailing" constant="35" id="DDo-JH-OMY"/>
+                                        <constraint firstItem="fxu-RE-23w" firstAttribute="leading" secondItem="jmX-nK-4A3" secondAttribute="trailing" constant="60" id="DDo-JH-OMY"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="jmX-nK-4A3" secondAttribute="bottom" constant="2" id="MRT-uP-K7q"/>
-                                        <constraint firstItem="aHc-5d-W6A" firstAttribute="leading" secondItem="jmX-nK-4A3" secondAttribute="trailing" constant="61" id="Ofy-Jc-6mR"/>
+                                        <constraint firstItem="aHc-5d-W6A" firstAttribute="leading" secondItem="jmX-nK-4A3" secondAttribute="trailing" constant="35" id="Ofy-Jc-6mR"/>
                                         <constraint firstItem="ubw-pf-uAS" firstAttribute="leading" secondItem="jmX-nK-4A3" secondAttribute="trailing" constant="35" id="R9d-Mn-izr"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="fxu-RE-23w" secondAttribute="bottom" constant="40" id="TS8-xe-h24"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="aHc-5d-W6A" secondAttribute="bottom" constant="41" id="c4C-9P-3xU"/>
@@ -513,7 +513,7 @@
         <image name="star-2" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hB5-dg-Mux"/>
+        <segue reference="X2l-sk-uq2"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.36656402887769857" blue="0.48349353171725917" alpha="0.84705882352941175" colorSpace="custom" customColorSpace="displayP3"/>
 </document>

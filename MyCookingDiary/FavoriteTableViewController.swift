@@ -32,6 +32,15 @@ class FavoriteTableViewController: UITableViewController {
         tableView.reloadData()
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableView.automaticDimension
+        
+        if tableView.visibleCells.isEmpty{
+            let alertController = UIAlertController(title: "Table is empty", message: "Your favorite list is empty! Add some more from All Recipe or recipe's detail page!", preferredStyle: .alert)
+            let actionCancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            let actionOkay = UIAlertAction(title: "Okay", style: .default, handler: nil)
+            alertController.addAction(actionCancel)
+            alertController.addAction(actionOkay)
+            present(alertController, animated: true, completion: nil)
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -127,17 +136,17 @@ class FavoriteTableViewController: UITableViewController {
         let name = selectedRecipe!.recipeName!
         let actionHandler = { (actions:UIAlertAction!) -> Void in self.performSegue(withIdentifier: "Edit Favorite", sender: tableView.cellForRow(at: indexPath))
         }
-        //        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        //        let controller = storyboard.instantiateViewController(withIdentifier: "RecipeController") as? AddRecipeViewController
-        //        controller?.currentRecipe = selectedRecipe
-        //        self.navigationController?.pushViewController(controller!, animated: true)
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let controller = storyboard.instantiateViewController(withIdentifier: "RecipeController") as? AddRecipeViewController
+                controller?.currentRecipe = selectedRecipe
+                self.navigationController?.pushViewController(controller!, animated: true)
         
-        let alertController = UIAlertController(title: "Recipe selected", message: "Selected row: \(indexPath.row) (\(name))", preferredStyle: .alert)
-        let actionCancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        let actionDetails = UIAlertAction(title: "Show Details", style: .default, handler: actionHandler)
-        alertController.addAction(actionCancel)
-        alertController.addAction(actionDetails)
-        present(alertController, animated: true, completion: nil)
+//        let alertController = UIAlertController(title: "Recipe selected", message: "Selected row: \(indexPath.row) (\(name))", preferredStyle: .alert)
+//        let actionCancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+//        let actionDetails = UIAlertAction(title: "Show Details", style: .default, handler: actionHandler)
+//        alertController.addAction(actionCancel)
+//        alertController.addAction(actionDetails)
+//        present(alertController, animated: true, completion: nil)
     }
 
 
